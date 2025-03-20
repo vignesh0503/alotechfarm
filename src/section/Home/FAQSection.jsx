@@ -40,7 +40,14 @@ const FAQSection = () => {
           <div className={homeStyle.FAQ_content}>
             <div className={homeStyle.faq_left_section}>
               <div className={homeStyle.accordian}>
-                <Accordion>
+                <Accordion
+                  sx={{
+                    borderTopLeftRadius: "0px !important",
+                    borderTopRightRadius: "0px !important",
+                    marginBottom: "20px !important",
+                    border: "1px solid #cecece",
+                  }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -58,7 +65,14 @@ const FAQSection = () => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion
+                  sx={{
+                    borderTopLeftRadius: "0px !important",
+                    borderTopRightRadius: "0px !important",
+                    marginBottom: "20px !important",
+                    border: "1px solid #cecece",
+                  }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -76,7 +90,14 @@ const FAQSection = () => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion
+                  sx={{
+                    borderTopLeftRadius: "0px !important",
+                    borderTopRightRadius: "0px !important",
+                    marginBottom: "20px !important",
+                    border: "1px solid #cecece",
+                  }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -94,7 +115,14 @@ const FAQSection = () => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion
+                  sx={{
+                    borderTopLeftRadius: "0px !important",
+                    borderTopRightRadius: "0px !important",
+                    marginBottom: "20px !important",
+                    border: "1px solid #cecece",
+                  }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
