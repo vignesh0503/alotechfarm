@@ -92,7 +92,10 @@ const WebFooter = () => {
           <h2>Social</h2>
           <ul className={footerStyle.footer_links}>
             <li>
-              <a href="#">
+              <a
+                href="https://www.instagram.com/alo_tech_farm?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+              >
                 <FaInstagram /> <span>Instagram</span>
               </a>
             </li>

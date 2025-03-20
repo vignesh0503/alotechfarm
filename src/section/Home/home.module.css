@@ -821,7 +821,7 @@ textarea {
 }
 
 .Formbutton:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -996,7 +996,7 @@ label {
 }
 
 .FAQbtn:hover {
-  box-shadow: 0 0 0 4px #dacece;
+  box-shadow: 0 0 0 2px #dacece;
   transform: scale(1.05);
   cursor: pointer;
 }
