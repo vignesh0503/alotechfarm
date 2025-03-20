@@ -1,0 +1,20 @@
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  /* font-family: "Poppins", sans-serif; */
+}
+.css-1808mag-MuiPaper-root-MuiAccordion-root {
+  border-top-left-radius: none !important;
+  border-top-right-radius: none !important;
+  margin-bottom: 20px !important;
+  border: 1px solid #cecece;
+}
+
+section {
+  scroll-behavior: smooth;
+  /* overflow-y: scroll; */
+  height: 100vh;
+}
