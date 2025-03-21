@@ -7,24 +7,74 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const FAQSection = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    email: "",
-    projectDescription: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [sucessMessage, setSucessMessage] = useState("");
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleSubmit = () => {
+    const namepattern =
+      /^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$/;
+    const emailpattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    let valid = true;
+    if (name.trim() === "") {
+      setNameError("Enter Your Name");
+      valid = false;
+    } else if (!namepattern.test(name)) {
+      setNameError("Name is invalid");
+      valid = false;
+    } else {
+      setNameError("");
+    }
+
+    if (email.trim() === "") {
+      setEmailError("Enter an Email");
+      valid = false;
+    } else if (!emailpattern.test(email)) {
+      setEmailError("Invalid email");
+      valid = false;
+    } else {
+      setEmailError("");
+    }
+
+    if (projectDescription.trim() === "") {
+      setDescriptionError("Please provide a project description.");
+      valid = false;
+    } else {
+      setDescriptionError("");
+    }
+
+    if (valid) {
+      setSucessMessage("Form Sent successfully");
+      setTimeout(() => setSucessMessage(""), 3000);
+      setName("");
+      setEmail("");
+      setProjectDescription("");
+    } else {
+      setSucessMessage("");
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    setNameError("");
+    setSucessMessage("");
   };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailError("");
+    setSucessMessage("");
+  };
+  const handleDescriptionChange = (e) => {
+    setProjectDescription(e.target.value);
+    setDescriptionError("");
+    setSucessMessage("");
+  };
+
   return (
     <Fragment>
       <div className={homeStyle.FAQSection}>
@@ -151,10 +201,22 @@ const FAQSection = () => {
                     <input
                       type="text"
                       name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
+                      value={name}
+                      onChange={handleNameChange}
                       placeholder="Enter Your First Name"
                     />
+                    {nameError && (
+                      <p
+                        style={{
+                          color: "red",
+                          fontSize: "12px",
+                          marginTop: "2px",
+                          textAlign: "left",
+                        }}
+                      >
+                        {nameError}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -162,28 +224,68 @@ const FAQSection = () => {
                     <input
                       type="email"
                       name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
+                      value={email}
+                      onChange={handleEmailChange}
                       placeholder="Mail"
                     />
+                    {emailError && (
+                      <p
+                        style={{
+                          color: "red",
+                          fontSize: "12px",
+                          marginTop: "2px",
+                          textAlign: "left",
+                        }}
+                      >
+                        {emailError}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label>Project Description</label>
                     <textarea
                       name="projectDescription"
-                      value={formData.projectDescription}
-                      onChange={handleInputChange}
+                      value={projectDescription}
+                      onChange={handleDescriptionChange}
                       placeholder="Project Description"
                       className={homeStyle.FAQ_textarea}
                     ></textarea>
+                    {descriptionError && (
+                      <p
+                        style={{
+                          color: "red",
+                          fontSize: "12px",
+                          marginTop: "2px",
+                          textAlign: "left",
+                        }}
+                      >
+                        {descriptionError}
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 <div className={homeStyle.FAQbtn_container}>
-                  <button type="submit" className={homeStyle.FAQbtn}>
+                  <button
+                    onClick={handleSubmit}
+                    type="button"
+                    className={homeStyle.FAQbtn}
+                  >
                     Send Request
                   </button>
                 </div>
+                {sucessMessage && (
+                  <p
+                    style={{
+                      color: "green",
+                      fontSize: "12px",
+                      marginTop: "5px",
+                      textAlign: "left",
+                    }}
+                  >
+                    {sucessMessage}
+                  </p>
+                )}
               </form>
             </div>
           </div>

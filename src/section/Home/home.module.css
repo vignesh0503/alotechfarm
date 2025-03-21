@@ -821,7 +821,7 @@ textarea {
 }
 
 .Formbutton:hover {
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -953,24 +953,24 @@ label {
 .FAQ_inputGroup input,
 .FAQ_textarea {
   width: 100%;
-  padding: 10px 0 10px 0px;
+  padding: 10px 0 10px 10px;
   height: 50px;
   border: 1px solid #cecece;
   border-radius: 10px;
   font-size: 16px;
   outline: none;
-  margin: 5px 0 10px 0;
+  margin: 5px 0 5px 0;
 }
-.FAQ_inputGroup input::placeholder {
+/* .FAQ_inputGroup input::placeholder {
   padding-left: 10px;
-}
+} */
 
 .FAQ_textarea {
   height: 100px;
 }
-.FAQ_textarea::placeholder {
+/* .FAQ_textarea::placeholder {
   padding-left: 10px;
-}
+} */
 .accordian {
   height: 100%;
   display: flex;

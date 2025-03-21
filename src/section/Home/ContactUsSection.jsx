@@ -48,17 +48,11 @@ const ContactUsSection = () => {
     if (collegeName.trim() === "") {
       setCollegeMessage("Enter Your College Name Correctly");
       valid = false;
-    } else if (!namepattern.test(collegeName)) {
-      setCollegeMessage("Enter Name in Correct Format");
-      valid = false;
     } else {
       setCollegeMessage("");
     }
     if (projectName.trim() === "") {
       setProjectMessage("Enter Your Project Name Correctly");
-      valid = false;
-    } else if (!namepattern.test(projectName)) {
-      setProjectMessage("Enter Name in Correct Format");
       valid = false;
     } else {
       setProjectMessage("");
