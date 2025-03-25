@@ -16,7 +16,7 @@ const WebHeader = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      if (scrollY > 600) {
+      if (scrollY > 550) {
         setLogo(LogoScrolled);
         setTextColor("#000");
         setButtonBackground(
@@ -86,12 +86,14 @@ const WebHeader = () => {
         </nav>
 
         <div className={headerstyle.header_btn}>
-          <div
-            className={headerstyle.Enrollment_btn}
+          <Link
+            to="contact"
+            smooth
             style={{ background: buttonBackground, color: buttonTextColor }}
+            className={headerstyle.Enrollment_btn}
           >
             Enrollment
-          </div>
+          </Link>
         </div>
       </div>
     </header>

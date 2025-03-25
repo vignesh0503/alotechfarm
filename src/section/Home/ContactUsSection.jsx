@@ -1,49 +1,53 @@
 import React, { useState } from "react";
 import homeStyle from "./home.module.css";
+import axios from "axios";
 
 const ContactUsSection = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNo, setPhoneno] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
   const [collegeName, setCollegeName] = useState("");
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
-  const [firstnameMessage, setFirstnameMessage] = useState("");
-  const [lastNameMessage, setLastNameMessage] = useState("");
+  const [firstNameMessage, setfirstNameMessage] = useState("");
+  const [lastNameMessage, setlastNameMessage] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
-  const [phonenoMessage, setPhonenoMessage] = useState("");
+  const [phoneNumberMessage, setphoneNumberMessage] = useState("");
   const [collegeMessage, setCollegeMessage] = useState("");
   const [projectMessage, setProjectMessage] = useState("");
   const [projectDescriptionMessage, setProjectDescriptionMessage] =
     useState("");
   const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const [load, setLoad] = useState(false);
 
-  const handleSubmit = () => {
-    const namepattern =
+  const validate = () => {
+    const firstnamepattern =
       /^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$/;
+    const lastnamepattern = /^[a-z]+([A-Z]|[a-z])*$/;
     const emailpattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const numberpattern =
       /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 
     let valid = true;
-    if (firstname.trim() === "") {
-      setFirstnameMessage("Enter Your First Name");
+    if (firstName.trim() === "") {
+      setfirstNameMessage("Enter Your First Name");
       valid = false;
-    } else if (!namepattern.test(firstname)) {
-      setFirstnameMessage("Name is invalid");
+    } else if (!firstnamepattern.test(firstName)) {
+      setfirstNameMessage("Name is invalid");
       valid = false;
     } else {
-      setFirstnameMessage("");
+      setfirstNameMessage("");
     }
-    if (lastname.trim() === "") {
-      setLastNameMessage("Enter Your Last Name");
+    if (lastName.trim() === "") {
+      setlastNameMessage("Enter Your Last Name");
       valid = false;
-    } else if (!namepattern.test(lastname)) {
-      setLastNameMessage("Name is invalid");
+    } else if (!lastnamepattern.test(lastName)) {
+      setlastNameMessage("Name is invalid");
       valid = false;
     } else {
-      setLastNameMessage("");
+      setlastNameMessage("");
     }
     if (collegeName.trim() === "") {
       setCollegeMessage("Enter Your College Name Correctly");
@@ -67,14 +71,14 @@ const ContactUsSection = () => {
     } else {
       setEmailMessage("");
     }
-    if (phoneNo.trim() === "") {
-      setPhonenoMessage("Enter Your Number");
+    if (phoneNumber.trim() === "") {
+      setphoneNumberMessage("Enter Your Number");
       valid = false;
-    } else if (!numberpattern.test(phoneNo)) {
-      setPhonenoMessage("Invalid Number");
+    } else if (!numberpattern.test(phoneNumber)) {
+      setphoneNumberMessage("Invalid Number");
       valid = false;
     } else {
-      setPhonenoMessage("");
+      setphoneNumberMessage("");
     }
 
     if (projectDescription.trim() === "") {
@@ -82,58 +86,111 @@ const ContactUsSection = () => {
       valid = false;
     }
     if (valid) {
-      setSuccess("Form submitted successfully");
+      setSuccess("");
       setTimeout(() => setSuccess(""), 3000);
-      setFirstname("");
-      setLastname("");
+      setfirstName("");
+      setlastName("");
       setCollegeName("");
       setProjectName("");
       setEmail("");
-      setPhoneno("");
+      setphoneNumber("");
       setProjectDescription("");
+      setError("");
     } else {
       setSuccess("");
+      setTimeout(() => setError(""), 3000);
+    }
+    return valid;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const isValid = validate();
+    if (!isValid) return;
+    setLoad(true);
+    try {
+      const payload = {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        collegeName,
+        projectName,
+        projectDescription,
+        enrollType: "Registered",
+      };
+      console.log(payload, "payload");
+      const response = await axios.post(
+        "https://aloinfotech.in/api/enroll/send",
+        payload
+      );
+      console.log(response, "jnk");
+      console.log(payload, "jnk");
+
+      if (response?.data?.status === true) {
+        setSuccess(response?.data?.message || "Register successful!");
+        setfirstName("");
+        setlastName("");
+        setCollegeName("");
+        setProjectName("");
+        setEmail("");
+        setphoneNumber("");
+        setProjectDescription("");
+      } else {
+        setError(response.data.message || "Register failed!");
+      }
+    } catch (e) {
+      setError(e.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoad(false);
     }
   };
 
   const handleFirstname = (e) => {
-    setFirstname(e.target.value);
-    setFirstnameMessage("");
+    setfirstName(e.target.value);
+    setfirstNameMessage("");
     setSuccess("");
+    setError("");
   };
   const handleLastname = (e) => {
-    setLastname(e.target.value);
-    setLastNameMessage("");
+    setlastName(e.target.value);
+    setlastNameMessage("");
     setSuccess("");
+    setError("");
   };
   const handleEmail = (e) => {
     setEmail(e.target.value);
     setEmailMessage("");
     setSuccess("");
+    setError("");
   };
   const handlePhone = (e) => {
-    setPhoneno(e.target.value);
-    setPhonenoMessage("");
+    setphoneNumber(e.target.value);
+    setphoneNumberMessage("");
     setSuccess("");
+    setError("");
   };
   const handleCollegename = (e) => {
     setCollegeName(e.target.value);
     setCollegeMessage("");
     setSuccess("");
+    setError("");
   };
   const handleProjectname = (e) => {
     setProjectName(e.target.value);
     setProjectMessage("");
     setSuccess("");
+    setError("");
   };
 
   const handleProjectDescription = (e) => {
     setProjectDescription(e.target.value);
     setProjectDescriptionMessage("");
     setSuccess("");
+    setError("");
   };
   return (
-    <section className={homeStyle.Contact_section}>
+    <section className={homeStyle.Contact_section} id="contact">
       <div className={homeStyle.ContactForm_container}>
         <div>
           <h2>Let's get you started</h2>
@@ -145,63 +202,38 @@ const ContactUsSection = () => {
               <div>
                 <label>First Name</label>
                 <input
-                  value={firstname}
+                  value={firstName}
                   onChange={handleFirstname}
                   type="text"
                   placeholder="Enter Your First Name"
                 />
-                {firstnameMessage && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {firstnameMessage}
-                  </p>
+                {firstNameMessage && (
+                  <p className={homeStyle.formData_Error}>{firstNameMessage}</p>
                 )}
               </div>
               <div>
                 <label>Last Name</label>
                 <input
-                  value={lastname}
+                  value={lastName}
                   onChange={handleLastname}
                   type="text"
                   placeholder="Enter Your Last Name"
                 />
                 {lastNameMessage && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {lastNameMessage}
-                  </p>
+                  <p className={homeStyle.formData_Error}>{lastNameMessage}</p>
                 )}
               </div>
               <div>
                 <label>Phone Number</label>
                 <input
                   type="text"
-                  value={phoneNo}
+                  value={phoneNumber}
                   onChange={handlePhone}
-                  placeholder="+91 99999 99999"
+                  placeholder="Enter Your Number"
                 />
-                {phonenoMessage && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {phonenoMessage}
+                {phoneNumberMessage && (
+                  <p className={homeStyle.formData_Error}>
+                    {phoneNumberMessage}
                   </p>
                 )}
               </div>
@@ -211,19 +243,10 @@ const ContactUsSection = () => {
                   value={email}
                   onChange={handleEmail}
                   type="email"
-                  placeholder="mail@gmail.com"
+                  placeholder="Enter Your Email"
                 />
                 {emailMessage && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {emailMessage}
-                  </p>
+                  <p className={homeStyle.formData_Error}>{emailMessage}</p>
                 )}
               </div>
               <div>
@@ -235,16 +258,7 @@ const ContactUsSection = () => {
                   placeholder="Name for your College"
                 />
                 {collegeMessage && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {collegeMessage}
-                  </p>
+                  <p className={homeStyle.formData_Error}>{collegeMessage}</p>
                 )}
               </div>
               <div>
@@ -253,19 +267,10 @@ const ContactUsSection = () => {
                   value={projectName}
                   onChange={handleProjectname}
                   type="text"
-                  placeholder="Title"
+                  placeholder="Title of Your Project"
                 />
                 {projectMessage && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {projectMessage}
-                  </p>
+                  <p className={homeStyle.formData_Error}>{projectMessage}</p>
                 )}
               </div>
 
@@ -277,14 +282,7 @@ const ContactUsSection = () => {
                   placeholder="Enter project details"
                 />
                 {projectDescriptionMessage && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
+                  <p className={homeStyle.formData_Error}>
                     {projectDescriptionMessage}
                   </p>
                 )}
@@ -296,20 +294,13 @@ const ContactUsSection = () => {
                 className={homeStyle.Formbutton}
                 onClick={handleSubmit}
               >
-                Submit
+                {load ? "Submitting..." : "Submit"}
               </button>
             </div>
             {success && (
-              <p
-                style={{
-                  color: "green",
-                  fontSize: "12px",
-                  textAlign: "center",
-                }}
-              >
-                {success}
-              </p>
+              <p className={homeStyle.Contact_succesMessage}>{success}</p>
             )}
+            {error && <p className={homeStyle.Contact_errorMessage}>{error}</p>}
           </form>
         </div>
       </div>

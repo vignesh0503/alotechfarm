@@ -5,26 +5,29 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import axios from "axios";
 
 const FAQSection = () => {
-  const [name, setName] = useState("");
+  const [firstName, setfirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
+  const [question, setQuestion] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [descriptionError, setDescriptionError] = useState("");
+  const [QuestionError, setQuestionError] = useState("");
   const [sucessMessage, setSucessMessage] = useState("");
+  const [error, setError] = useState("");
+  const [load, setLoad] = useState(false);
 
-  const handleSubmit = () => {
+  const validate = () => {
     const namepattern =
       /^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$/;
     const emailpattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     let valid = true;
-    if (name.trim() === "") {
+    if (firstName.trim() === "") {
       setNameError("Enter Your Name");
       valid = false;
-    } else if (!namepattern.test(name)) {
+    } else if (!namepattern.test(firstName)) {
       setNameError("Name is invalid");
       valid = false;
     } else {
@@ -41,38 +44,79 @@ const FAQSection = () => {
       setEmailError("");
     }
 
-    if (projectDescription.trim() === "") {
-      setDescriptionError("Please provide a project description.");
+    if (question.trim() === "") {
+      setQuestionError("Please Enter Your Question.");
       valid = false;
     } else {
-      setDescriptionError("");
+      setQuestionError("");
     }
 
     if (valid) {
-      setSucessMessage("Form Sent successfully");
+      setSucessMessage("");
       setTimeout(() => setSucessMessage(""), 3000);
-      setName("");
+      setfirstName("");
       setEmail("");
-      setProjectDescription("");
+      setQuestion("");
+      setError("");
     } else {
       setSucessMessage("");
+    }
+    return valid;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const isValid = validate();
+    if (!isValid) return;
+    setLoad(true);
+    try {
+      const payload = {
+        firstName,
+        email,
+        question,
+        enrollType: "request",
+      };
+      console.log(payload, "payload");
+      const response = await axios.post(
+        "https://aloinfotech.in/api/enroll/send",
+        payload
+      );
+      console.log(response, "jnk");
+      console.log(payload, "jnk");
+
+      if (response?.data?.status === true) {
+        setSucessMessage(response?.data?.message || "Request Sent successful!");
+        setfirstName("");
+        setEmail("");
+        setQuestion("");
+      } else {
+        setError(response.data.message || "Request failed!");
+      }
+    } catch (e) {
+      console.error("Error:", e);
+      setError(e.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoad(false);
     }
   };
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setfirstName(e.target.value);
     setNameError("");
     setSucessMessage("");
+    setError("");
   };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setEmailError("");
     setSucessMessage("");
+    setError("");
   };
-  const handleDescriptionChange = (e) => {
-    setProjectDescription(e.target.value);
-    setDescriptionError("");
+  const handleQuestionChange = (e) => {
+    setQuestion(e.target.value);
+    setQuestionError("");
     setSucessMessage("");
+    setError("");
   };
 
   return (
@@ -104,14 +148,14 @@ const FAQSection = () => {
                     id="panel1-header"
                   >
                     <Typography component="span">
-                      Which is the best Application
+                      Which is the best application for my needs?
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
+                      The best application depends on your specific
+                      requirements! Our team can guide you to the perfect
+                      solution based on your business or project needs.
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
@@ -129,14 +173,14 @@ const FAQSection = () => {
                     id="panel1-header"
                   >
                     <Typography component="span">
-                      Which is the best Application
+                      How can I request a custom solution?
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
+                      Simply fill out the form on this page with your details
+                      and query, and our team will get back to you with tailored
+                      recommendations.
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
@@ -154,14 +198,15 @@ const FAQSection = () => {
                     id="panel1-header"
                   >
                     <Typography component="span">
-                      Which is the best Application
+                      What services does Alo Tech Farm provide?
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
+                      We specialize in supporting student startups, project
+                      development, and IT innovations. Whether you need
+                      mentorship, funding, or technical guidance, we’re here to
+                      help!
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
@@ -179,14 +224,14 @@ const FAQSection = () => {
                     id="panel1-header"
                   >
                     <Typography component="span">
-                      Which is the best Application
+                      How can I collaborate with Alo Tech Farm?
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
+                      We welcome innovative minds! Reach out via our contact
+                      form, and let’s explore potential collaborations and
+                      growth opportunities.
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
@@ -201,21 +246,12 @@ const FAQSection = () => {
                     <input
                       type="text"
                       name="firstName"
-                      value={name}
+                      value={firstName}
                       onChange={handleNameChange}
                       placeholder="Enter Your First Name"
                     />
                     {nameError && (
-                      <p
-                        style={{
-                          color: "red",
-                          fontSize: "12px",
-                          marginTop: "2px",
-                          textAlign: "left",
-                        }}
-                      >
-                        {nameError}
-                      </p>
+                      <p className={homeStyle.formData_Error}>{nameError}</p>
                     )}
                   </div>
 
@@ -229,37 +265,21 @@ const FAQSection = () => {
                       placeholder="Mail"
                     />
                     {emailError && (
-                      <p
-                        style={{
-                          color: "red",
-                          fontSize: "12px",
-                          marginTop: "2px",
-                          textAlign: "left",
-                        }}
-                      >
-                        {emailError}
-                      </p>
+                      <p className={homeStyle.formData_Error}>{emailError}</p>
                     )}
                   </div>
                   <div>
-                    <label>Project Description</label>
+                    <label>Question</label>
                     <textarea
-                      name="projectDescription"
-                      value={projectDescription}
-                      onChange={handleDescriptionChange}
-                      placeholder="Project Description"
+                      name="question"
+                      value={question}
+                      onChange={handleQuestionChange}
+                      placeholder="Ask Your Question"
                       className={homeStyle.FAQ_textarea}
                     ></textarea>
-                    {descriptionError && (
-                      <p
-                        style={{
-                          color: "red",
-                          fontSize: "12px",
-                          marginTop: "2px",
-                          textAlign: "left",
-                        }}
-                      >
-                        {descriptionError}
+                    {QuestionError && (
+                      <p className={homeStyle.formData_Error}>
+                        {QuestionError}
                       </p>
                     )}
                   </div>
@@ -271,21 +291,13 @@ const FAQSection = () => {
                     type="button"
                     className={homeStyle.FAQbtn}
                   >
-                    Send Request
+                    {load ? "Submitting..." : "Send Request"}
                   </button>
                 </div>
                 {sucessMessage && (
-                  <p
-                    style={{
-                      color: "green",
-                      fontSize: "12px",
-                      marginTop: "5px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {sucessMessage}
-                  </p>
+                  <p className={homeStyle.succesMessage}>{sucessMessage}</p>
                 )}
+                {error && <p className={homeStyle.errorMessage}>{error}</p>}
               </form>
             </div>
           </div>

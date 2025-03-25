@@ -1,34 +1,38 @@
 import React from "react";
-import Teamimg1 from "../../assets/ourteamimg1.jpeg";
-import Teamimg2 from "../../assets/ourteamimg2.jpeg";
-import Teamimg3 from "../../assets/ourteamimg3.png";
+import Teamimg1 from "../../assets/boss1.jpg";
+import Teamimg2 from "../../assets/isai.jpg";
+import Teamimg3 from "../../assets/Ahin.jpg";
 import homeStyle from "./home.module.css";
+import { FaLinkedin } from "react-icons/fa";
 
 const OurTeamSection = () => {
   const teams = [
     {
       id: 1,
-      name: "John Doe",
-      role: "AI Chatbot Developer",
+      name: "Natarajan B",
+      role: "Founder & CEO",
       description:
-        "Developed an advanced AI chatbot that revolutionized customer service interactions, increasing satisfaction by 30%.",
+        "Meet Natarajan, the visionary behind ALO Info-Tech, turned a small team into a thriving family. His innovation and leadership drive our success. Grateful for his guidance in shaping our future",
       image: Teamimg1,
+      linkedinUrl: "https://www.linkedin.com/in/natarajan13",
     },
     {
       id: 2,
-      name: "Sarah Johnson",
-      role: "Product Designer",
+      name: "Esai Kumar",
+      role: "CFO & UI/UX Designer",
       description:
-        "Specialized in creating intuitive and user-friendly product designs that elevate customer experience.",
+        "Meet Esai Kumar, CFO & UI/UX Designer at ALO Info-Tech. His financial expertise and design skills drive our growth, inspiring innovation and excellence in the ALO family.",
       image: Teamimg2,
+      linkedinUrl: "https://www.linkedin.com/in/esai-kumar-38620a25b/",
     },
     {
       id: 3,
-      name: "Michael Smith",
-      role: "Software Engineer",
+      name: "Ahin PM",
+      role: "Business Development Manager",
       description:
-        "Built scalable and high-performance web applications, enhancing system efficiency.",
+        "Meet Ahin PM, Business Development Manager at ALO Info-Tech. His strategic vision and leadership drive our growth, fostering innovation and excellence in the ALO family.",
       image: Teamimg3,
+      linkedinUrl: "https://www.linkedin.com/in/ahin-pm-a40b44190/",
     },
   ];
 
@@ -43,12 +47,19 @@ const OurTeamSection = () => {
         <div className={homeStyle.Ourteam_grid}>
           {teams.map((team) => (
             <div key={team.id} className={homeStyle.Ourteam_card}>
-              <img
-                src={team.image}
-                alt={team.name}
-                className={homeStyle.Ourteam_image}
-              />
-              <h3 className={homeStyle.Ourteam_name}>{team.name}</h3>
+              <div className={homeStyle.Ourteam_image_card}>
+                <img
+                  src={team.image}
+                  alt={team.name}
+                  className={homeStyle.Ourteam_image}
+                />
+              </div>
+              <div className={homeStyle.Ourteam_name_card}>
+                <h3 className={homeStyle.Ourteam_name}>{team.name}</h3>
+                <a href={team.linkedinUrl} target="_blank">
+                  <FaLinkedin />
+                </a>
+              </div>
               <h4 className={homeStyle.Ourteam_role}>{team.role}</h4>
               <p className={homeStyle.Ourteam_description}>
                 {team.description}

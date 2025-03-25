@@ -1,7 +1,7 @@
 import React from "react";
-import portfolioimg1 from "../../assets/portfolioimg.png";
-import portfolioimg2 from "../../assets/portfolioimg2.png";
-import portfolioimg3 from "../../assets/portfolioimg3.png";
+import portfolioimg1 from "../../assets/portfolio1.png";
+import portfolioimg2 from "../../assets/photo2.png";
+import portfolioimg3 from "../../assets/photo3.png";
 import homeStyle from "./home.module.css";
 
 const Portfolio = () => {
@@ -10,21 +10,21 @@ const Portfolio = () => {
       id: 1,
       title: "AI Chatbot Development",
       description:
-        "Developed an advanced AI chatbot that revolutionized customer service interactions, resulting in a 30% increase in customer satisfaction.",
+        "That revolutionized customer service interactions, resulting in a 30% increase in customer satisfaction.",
       image: portfolioimg1,
     },
     {
       id: 2,
-      title: "Product Designer Portfolio",
+      title: "Alo Invoice App",
       description:
-        "Developed an advanced AI chatbot that revolutionized customer service interactions, resulting in a 30% increase in customer satisfaction.",
+        "Empowering businesses with seamless invoicing, automated payments, and smart financial management.",
       image: portfolioimg2,
     },
     {
       id: 3,
-      title: "Portfolio Template",
+      title: "T-Shirt E-Commerce Platform",
       description:
-        "Developed an advanced AI chatbot that revolutionized customer service interactions, resulting in a 30% increase in customer satisfaction.",
+        "A fully functional E-commerce platform designed for custom T-shirt printing and sales.",
       image: portfolioimg3,
     },
   ];

@@ -12,12 +12,9 @@ const AboutUsSection = () => {
           <div className={homeStyle.about_content}>
             <h1>About Us</h1>
             <p>
-              Welcome to Alo Tech Farm! We are dedicated to revolutionizing the
-              tech industry with our innovative solutions. Our mission is to
-              empower individuals and businesses through cutting-edge
-              technology. Our vision is to create a connected world where
-              technology enhances every aspect of life. At Alo Tech Farm, we
-              value creativity, integrity, and excellence in everything we do.
+              Alo Tech Farm empowers student innovators by supporting startups
+              and IT projects. We bridge the gap between education and industry,
+              fostering creativity and real-world problem-solving.
             </p>
             <button className={homeStyle.morebtn}>More</button>
           </div>

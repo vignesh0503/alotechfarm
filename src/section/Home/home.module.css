@@ -315,6 +315,7 @@
 .serviceDescription {
   font-size: 14px;
   margin-top: 8px;
+  text-transform: capitalize;
 }
 
 .serviceCard:hover {
@@ -477,6 +478,7 @@
   color: #555;
   margin-top: 10px;
   line-height: 1.5;
+  text-transform: capitalize;
   transition: text-decoration 0.3s ease;
 }
 
@@ -488,6 +490,7 @@
 .portfolio_card:hover .projectTitle,
 .portfolio_card:hover .projectDescription {
   text-decoration: underline;
+  text-decoration-thickness: 1px;
   text-decoration-color: #000;
   transition: text-decoration 0.3s ease;
 }
@@ -510,6 +513,7 @@
   .portfolio_grid {
     gap: 20px;
     justify-content: center;
+    align-items: center;
   }
 
   .portfolio_card {
@@ -622,21 +626,36 @@
   transform: scale(1.03);
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
-
+.Ourteam_image_card {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .Ourteam_image {
   width: 100%;
-  height: 250px;
-  border-radius: 10px;
+  height: 350px;
+  border-radius: 20px;
   object-fit: cover;
 }
 
 .Ourteam_name {
-  margin-top: 15px;
   font-size: 18px;
   font-weight: bold;
   color: #333;
 }
 
+.Ourteam_name_card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* .Ourteam_name_card a {
+  color:#333;
+} */
 .Ourteam_role {
   font-size: 14px;
   color: #666;
@@ -801,6 +820,10 @@ textarea {
   resize: none;
   margin-top: 10px;
 }
+.inputGroup input,
+textarea::placeholder {
+  font-size: 14px;
+}
 .formbtn_container {
   display: flex;
   justify-content: center;
@@ -825,6 +848,25 @@ textarea {
   transform: scale(1.05);
   cursor: pointer;
 }
+.Contact_succesMessage {
+  color: green !important;
+  font-size: 12px !important;
+  margin-top: 5px !important;
+}
+
+.Contact_errorMessage {
+  color: red !important;
+  font-size: 12px !important;
+  margin-top: 5px !important;
+}
+
+.formData_Error {
+  color: red !important;
+  font-size: 12px !important;
+  margin-top: 5px !important;
+  text-align: left !important;
+}
+
 /* Media Queries */
 
 @media (max-width: 1024px) {
@@ -957,20 +999,20 @@ label {
   height: 50px;
   border: 1px solid #cecece;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
   margin: 5px 0 5px 0;
 }
-/* .FAQ_inputGroup input::placeholder {
-  padding-left: 10px;
-} */
+.FAQ_inputGroup input::placeholder {
+  font-size: 14px;
+}
 
 .FAQ_textarea {
   height: 100px;
 }
-/* .FAQ_textarea::placeholder {
-  padding-left: 10px;
-} */
+.FAQ_textarea::placeholder {
+  font-size: 14px;
+}
 .accordian {
   height: 100%;
   display: flex;
@@ -999,6 +1041,19 @@ label {
   box-shadow: 0 0 0 2px #dacece;
   transform: scale(1.05);
   cursor: pointer;
+}
+.succesMessage {
+  color: green !important;
+  font-size: 12px !important;
+  margin-top: 5px !important;
+  text-align: left !important;
+}
+
+.errorMessage {
+  color: red !important;
+  font-size: 12px !important;
+  text-align: left !important;
+  margin-top: 5px !important;
 }
 
 /* Media Query */
