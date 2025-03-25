@@ -1,10 +1,24 @@
 /* Hero Section Starts */
 
 .bg_img {
-  background: linear-gradient(135deg, #4e8397, #9b6da6, #d65db1);
+  background: radial-gradient(circle, #4e8397, #9b6da6, #d65db1);
+  background-size: 200% 200%;
   width: 100%;
   overflow: hidden;
   position: relative;
+  animation: linearAnimation 5s ease infinite;
+}
+
+@keyframes linearAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .HeroContent {
@@ -132,7 +146,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 100% ;
   margin: 70px 0;
   background-color: white;
   height: 100vh;
@@ -141,9 +155,9 @@
 .About_container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   width: 90vw;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   gap: 40px;
 }
 
@@ -209,6 +223,7 @@
   .about_section {
     /* height: 170vh; */
     height: auto;
+    margin: 40px 0 0 0;
   }
 }
 
@@ -278,7 +293,7 @@
 
 .WeProvideContainer {
   width: 90vw;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 .heading {
@@ -417,7 +432,7 @@
 
 .container {
   width: 90vw;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 .title {
@@ -589,7 +604,7 @@
 
 .Ourteam_container {
   width: 90vw;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 .Ourteam_title {
