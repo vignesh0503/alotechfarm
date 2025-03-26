@@ -1,6 +1,6 @@
 import React from "react";
-import Teamimg1 from "../../assets/boss1.jpg";
-import Teamimg2 from "../../assets/isai.jpg";
+import Teamimg1 from "../../assets/md.jpg";
+import Teamimg2 from "../../assets/esai.jpg";
 import Teamimg3 from "../../assets/Ahin.jpg";
 import homeStyle from "./home.module.css";
 import { FaLinkedin } from "react-icons/fa";
