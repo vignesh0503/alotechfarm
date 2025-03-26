@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import homeStyle from "./home.module.css";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUsSection = () => {
   const [firstName, setfirstName] = useState("");
@@ -119,16 +121,17 @@ const ContactUsSection = () => {
         projectDescription,
         enrollType: "Registered",
       };
-      console.log(payload, "payload");
+      // console.log(payload, "payload");
       const response = await axios.post(
         "https://aloinfotech.in/api/enroll/send",
         payload
       );
-      console.log(response, "jnk");
-      console.log(payload, "jnk");
+      // console.log(response, "jnk");
+      // console.log(payload, "jnk");
 
       if (response?.data?.status === true) {
-        setSuccess(response?.data?.message || "Register successful!");
+        // setSuccess(response?.data?.message || "Register successful!");
+        toast.success(response?.data?.message || "Register successful!");
         setfirstName("");
         setlastName("");
         setCollegeName("");
@@ -137,10 +140,12 @@ const ContactUsSection = () => {
         setphoneNumber("");
         setProjectDescription("");
       } else {
-        setError(response.data.message || "Register failed!");
+        // setError(response.data.message || "Register failed!");
+        toast.error(response.data.message || "Register failed!");
       }
     } catch (e) {
-      setError(e.response?.data?.message || "Something went wrong");
+      // setError(e.response?.data?.message || "Something went wrong");
+      toast.error(e.response?.data?.message || "Something went wrong");
     } finally {
       setLoad(false);
     }
@@ -304,6 +309,10 @@ const ContactUsSection = () => {
           </form>
         </div>
       </div>
+
+      {/* Toast Container */}
+
+      <ToastContainer />
     </section>
   );
 };

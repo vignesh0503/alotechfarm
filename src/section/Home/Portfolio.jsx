@@ -1,5 +1,5 @@
 import React from "react";
-import portfolioimg1 from "../../assets/portfolio1.png";
+import portfolioimg1 from "../../assets/photo1.png";
 import portfolioimg2 from "../../assets/photo2.png";
 import portfolioimg3 from "../../assets/photo3.png";
 import homeStyle from "./home.module.css";

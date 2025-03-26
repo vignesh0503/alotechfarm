@@ -8,7 +8,7 @@ const HeroSection = () => {
       <div className={homeStyle.HeroContent}>
         <h1>Welcome to the Future of Technology</h1>
         <p>
-          Experience innovation like never before with our cutting-edge
+          Experience innovation like never before with our cutting edge
           solutions.
         </p>
         <div className={homeStyle.getstartedbtn}>Get Started</div>

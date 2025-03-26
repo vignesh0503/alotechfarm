@@ -6,8 +6,11 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FAQSection = () => {
+  const [expanded, setExpanded] = useState(false);
   const [firstName, setfirstName] = useState("");
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
@@ -76,25 +79,28 @@ const FAQSection = () => {
         question,
         enrollType: "request",
       };
-      console.log(payload, "payload");
+      // console.log(payload, "payload");
       const response = await axios.post(
         "https://aloinfotech.in/api/enroll/send",
         payload
       );
-      console.log(response, "jnk");
-      console.log(payload, "jnk");
+      // console.log(response, "jnk");
+      // console.log(payload, "jnk");
 
       if (response?.data?.status === true) {
-        setSucessMessage(response?.data?.message || "Request Sent successful!");
+        // setSucessMessage(response?.data?.message || "Request Sent successful!");
+        toast.success(response?.data?.message || "Request Sent successful!");
         setfirstName("");
         setEmail("");
         setQuestion("");
       } else {
-        setError(response.data.message || "Request failed!");
+        // setError(response.data.message || "Request failed!");
+        toast.error(response.data.message || "Request failed!");
       }
     } catch (e) {
       console.error("Error:", e);
-      setError(e.response?.data?.message || "Something went wrong");
+      // setError(e.response?.data?.message || "Something went wrong");
+      toast.error(e.response?.data?.message || "Something went wrong");
     } finally {
       setLoad(false);
     }
@@ -117,6 +123,9 @@ const FAQSection = () => {
     setQuestionError("");
     setSucessMessage("");
     setError("");
+  };
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
   };
 
   return (
@@ -141,6 +150,8 @@ const FAQSection = () => {
                     marginBottom: "20px !important",
                     border: "1px solid #cecece",
                   }}
+                  expanded={expanded === "panel1"}
+                  onChange={handleChange("panel1")}
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -159,6 +170,7 @@ const FAQSection = () => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+
                 <Accordion
                   sx={{
                     borderTopLeftRadius: "0px !important",
@@ -166,11 +178,13 @@ const FAQSection = () => {
                     marginBottom: "20px !important",
                     border: "1px solid #cecece",
                   }}
+                  expanded={expanded === "panel2"}
+                  onChange={handleChange("panel2")}
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
+                    aria-controls="panel2-content"
+                    id="panel2-header"
                   >
                     <Typography component="span">
                       How can I request a custom solution?
@@ -184,6 +198,7 @@ const FAQSection = () => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+
                 <Accordion
                   sx={{
                     borderTopLeftRadius: "0px !important",
@@ -191,11 +206,13 @@ const FAQSection = () => {
                     marginBottom: "20px !important",
                     border: "1px solid #cecece",
                   }}
+                  expanded={expanded === "panel3"}
+                  onChange={handleChange("panel3")}
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
+                    aria-controls="panel3-content"
+                    id="panel3-header"
                   >
                     <Typography component="span">
                       What services does Alo Tech Farm provide?
@@ -210,6 +227,7 @@ const FAQSection = () => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+
                 <Accordion
                   sx={{
                     borderTopLeftRadius: "0px !important",
@@ -217,11 +235,13 @@ const FAQSection = () => {
                     marginBottom: "20px !important",
                     border: "1px solid #cecece",
                   }}
+                  expanded={expanded === "panel4"}
+                  onChange={handleChange("panel4")}
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
+                    aria-controls="panel4-content"
+                    id="panel4-header"
                   >
                     <Typography component="span">
                       How can I collaborate with Alo Tech Farm?
