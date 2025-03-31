@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Logo from "../../assets/logoWhite.png";
-import LogoScrolled from "../../assets/logo.png";
+import LogoScrolled from "../../assets/AloTechFarmlogo.png";
 import headerstyle from "./header.module.css";
 
 const WebHeader = () => {
